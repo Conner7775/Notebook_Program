@@ -141,6 +141,9 @@
   <ItemGroup>
     <ClCompile Include="Notebook_Program.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Notebook_Program.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
