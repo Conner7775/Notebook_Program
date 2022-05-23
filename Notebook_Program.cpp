@@ -4,32 +4,48 @@
 #include <iostream>
 #include <fstream>
 #include "Notebook_Program.h"
+#include <filesystem>
+
 
 using namespace std;
 
-void noteGen() {
-    string filename;
-    cout << "Name of your note: ";
-    cin >> filename;
-    ofstream o(filename);
-    o << filename + ": " << endl;
-    o.close();
+static int FILECOUNT = 0;
+
+Notebook::Notebook() {
+    filename = "Untitled-" + FILECOUNT++;
+}
+
+Notebook::Notebook(string f, string c) {
+    filename = f;
+    content = c;
+
+}
+
+void Notebook::noteGen() {
+    Notebook temp;
+    cout << "Name your new note: ";
+    cin >> temp.filename;
+    ofstream outfile(temp.filename);
+    outfile << temp.filename + ": " << endl;
+    outfile.close();
+    temp.noteID++;
     
 }
 
-void access() {
+void Notebook::access() {
+
 
 }
 
-void rename() {
+void Notebook::rename() {
 
 }
 
-void removeNote() {
-
+void Notebook::removeNote() {
+   
 }
 
-void menu() {
+void Notebook::menu() {
     int choice = 0;
     cin >> choice;
     while (choice != 5) {
@@ -59,9 +75,36 @@ void menu() {
 
 }
 
+string Notebook::getFileName() {
+    return filename;
+}
+
+string Notebook::getContent() {
+    return content;
+}
+
+int Notebook::getNoteID() {
+    return noteID;
+}
+
+int fileCount() {
+    auto dirIter = std::filesystem::directory_iterator("directory_path");
+    int fileCount = 0;
+
+    for (auto& entry : dirIter)
+    {
+        if (entry.is_regular_file())
+        {
+            ++fileCount;
+        }
+    }
+    return fileCount;
+}
+
 int main()
 {
-    menu();
+    Notebook obj;
+    obj.menu();
 }
 
 
